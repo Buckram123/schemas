@@ -1,9 +1,9 @@
 {
-  "name": "App",
-  "description": "App description.",
+  "name": "Payments",
+  "description": "Get paid in any asset.",
   "website": "",
   "docs": "",
-  "type": "api",
+  "type": "app",
   "icon": "GiTrade",
   "enabled": true
 }
