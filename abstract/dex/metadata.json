@@ -1,7 +1,7 @@
 {
   "name": "DEX",
   "description": "Swap assets on different dexes directly from your vault.",
-  "docs": "https://docs.abstract.money/creating-your-first-abstract-os/modules/dex-api",
+  "docs": "https://docs.rs/abstract-dex-standard/latest/abstract_dex_standard/msg/enum.DexAction.html",
   "website": "https://abstract.money",
   "type": "adapter",
   "icon": "GiTrade",
