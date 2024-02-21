@@ -23,7 +23,7 @@
       ],
       "properties": {
         "module": {
-          "$ref": "#/definitions/ChallengeQueryMsg"
+          "$ref": "#/definitions/SubscriptionQueryMsg"
         }
       },
       "additionalProperties": false
@@ -94,124 +94,66 @@
         }
       ]
     },
-    "ChallengeQueryMsg": {
-      "description": "Challenge query messages",
+    "SubscriptionQueryMsg": {
+      "description": "Subscriptions query messages",
       "oneOf": [
         {
-          "description": "Get challenge info, will return null if there was no challenge by Id Returns [`ChallengeResponse`]",
+          "description": "Get state of subscriptions and contributors Returns [`StateResponse`]",
           "type": "object",
           "required": [
-            "challenge"
+            "state"
           ],
           "properties": {
-            "challenge": {
+            "state": {
               "type": "object",
-              "required": [
-                "challenge_id"
-              ],
-              "properties": {
-                "challenge_id": {
-                  "description": "Id of requested challenge",
-                  "type": "integer",
-                  "format": "uint64",
-                  "minimum": 0.0
-                }
-              },
               "additionalProperties": false
             }
           },
           "additionalProperties": false
         },
         {
-          "description": "Get list of challenges Returns [`ChallengesResponse`]",
+          "description": "Get config of subscriptions and contributors Returns [`SubscriptionConfig`]",
           "type": "object",
           "required": [
-            "challenges"
+            "config"
           ],
           "properties": {
-            "challenges": {
+            "config": {
               "type": "object",
-              "properties": {
-                "limit": {
-                  "description": "Max amount of challenges in response",
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "format": "uint64",
-                  "minimum": 0.0
-                },
-                "start_after": {
-                  "description": "start after challenge Id",
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "format": "uint64",
-                  "minimum": 0.0
-                }
-              },
               "additionalProperties": false
             }
           },
           "additionalProperties": false
         },
         {
-          "description": "List of friends by Id Returns [`FriendsResponse`]",
+          "description": "Get minimum of one month's worth to (re)-subscribe. Returns [`SubscriptionFeeResponse`]",
           "type": "object",
           "required": [
-            "friends"
+            "fee"
           ],
           "properties": {
-            "friends": {
+            "fee": {
               "type": "object",
-              "required": [
-                "challenge_id"
-              ],
-              "properties": {
-                "challenge_id": {
-                  "description": "Id of requested challenge",
-                  "type": "integer",
-                  "format": "uint64",
-                  "minimum": 0.0
-                }
-              },
               "additionalProperties": false
             }
           },
           "additionalProperties": false
         },
         {
-          "description": "Get vote of friend Returns [`VoteResponse`]",
+          "description": "Get state of the subscriber Returns [`SubscriberResponse`]",
           "type": "object",
           "required": [
-            "vote"
+            "subscriber"
           ],
           "properties": {
-            "vote": {
+            "subscriber": {
               "type": "object",
               "required": [
-                "challenge_id",
-                "voter_addr"
+                "addr"
               ],
               "properties": {
-                "challenge_id": {
-                  "description": "Id of requested challenge",
-                  "type": "integer",
-                  "format": "uint64",
-                  "minimum": 0.0
-                },
-                "proposal_id": {
-                  "description": "Proposal id of previous proposal Providing None requests last proposal results",
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "format": "uint64",
-                  "minimum": 0.0
-                },
-                "voter_addr": {
-                  "description": "Addr of the friend",
+                "addr": {
+                  "description": "Address of subscriber",
                   "type": "string"
                 }
               },
@@ -221,35 +163,24 @@
           "additionalProperties": false
         },
         {
-          "description": "Get votes of challenge Returns [`VotesResponse`]",
+          "description": "Get list of subscribers Returns [`SubscribersResponse`]",
           "type": "object",
           "required": [
-            "votes"
+            "subscribers"
           ],
           "properties": {
-            "votes": {
+            "subscribers": {
               "type": "object",
-              "required": [
-                "challenge_id"
-              ],
               "properties": {
-                "challenge_id": {
-                  "description": "Id of requested challenge",
-                  "type": "integer",
-                  "format": "uint64",
-                  "minimum": 0.0
+                "expired_subs": {
+                  "description": "Get list of expired(inactive) subscribers instead",
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
                 },
                 "limit": {
-                  "description": "Max amount of challenges in response",
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "format": "uint64",
-                  "minimum": 0.0
-                },
-                "proposal_id": {
-                  "description": "Proposal id of previous proposal Providing None requests last proposal results",
+                  "description": "Limit",
                   "type": [
                     "integer",
                     "null"
@@ -258,7 +189,7 @@
                   "minimum": 0.0
                 },
                 "start_after": {
-                  "description": "start after Addr",
+                  "description": "Start after subscriber address",
                   "anyOf": [
                     {
                       "$ref": "#/definitions/Addr"
@@ -267,49 +198,6 @@
                       "type": "null"
                     }
                   ]
-                }
-              },
-              "additionalProperties": false
-            }
-          },
-          "additionalProperties": false
-        },
-        {
-          "description": "Get results of previous votes for this challenge Returns [`ProposalsResponse`]",
-          "type": "object",
-          "required": [
-            "proposals"
-          ],
-          "properties": {
-            "proposals": {
-              "type": "object",
-              "required": [
-                "challenge_id"
-              ],
-              "properties": {
-                "challenge_id": {
-                  "description": "Challenge Id for previous votes",
-                  "type": "integer",
-                  "format": "uint64",
-                  "minimum": 0.0
-                },
-                "limit": {
-                  "description": "Max amount of proposals in response",
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "format": "uint64",
-                  "minimum": 0.0
-                },
-                "start_after": {
-                  "description": "start after ProposalId",
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "format": "uint64",
-                  "minimum": 0.0
                 }
               },
               "additionalProperties": false

@@ -23,7 +23,7 @@
       ],
       "properties": {
         "module": {
-          "$ref": "#/definitions/DCAQueryMsg"
+          "$ref": "#/definitions/EtfQueryMsg"
         }
       },
       "additionalProperties": false
@@ -90,50 +90,18 @@
         }
       ]
     },
-    "DCAId": {
-      "type": "integer",
-      "format": "uint64",
-      "minimum": 0.0
-    },
-    "DCAQueryMsg": {
-      "description": "DCA query messages",
+    "EtfQueryMsg": {
+      "description": "Query Msg",
       "oneOf": [
         {
-          "description": "Get config of the DCA app Returns [`ConfigResponse`]",
+          "description": "Returns [`StateResponse`]",
           "type": "object",
           "required": [
-            "config"
+            "state"
           ],
           "properties": {
-            "config": {
+            "state": {
               "type": "object",
-              "additionalProperties": false
-            }
-          },
-          "additionalProperties": false
-        },
-        {
-          "description": "Get DCA Entry Returns [`DCAResponse`]",
-          "type": "object",
-          "required": [
-            "d_c_a"
-          ],
-          "properties": {
-            "d_c_a": {
-              "type": "object",
-              "required": [
-                "dca_id"
-              ],
-              "properties": {
-                "dca_id": {
-                  "description": "Id of the DCA",
-                  "allOf": [
-                    {
-                      "$ref": "#/definitions/DCAId"
-                    }
-                  ]
-                }
-              },
               "additionalProperties": false
             }
           },
