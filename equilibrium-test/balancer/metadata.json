@@ -1,0 +1,9 @@
+{
+  "name": "Balancer",
+  "description": "Create a weighted portfolio of assets and earn fees on the trades that occur in your pool.",
+  "website": "https://abstract.money/",
+  "docs": "",
+  "type": "app",
+  "icon": "RiCoinsLine",
+  "enabled": false
+}
