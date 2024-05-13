@@ -1,9 +1,9 @@
 {
-  "name": "App",
-  "description": "App description.",
+  "name": "IBC Mail Server",
+  "description": "IBC mail adapter.",
   "website": "",
   "docs": "",
-  "type": "api",
+  "type": "adapter",
   "icon": "GiTrade",
   "enabled": true
 }
